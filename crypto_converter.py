@@ -2,9 +2,12 @@ from requests import Request, Session
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import json
 from datetime import datetime
+import os
 
-api_key = '007bfbc5-f2f2-4c56-8c0d-6fa1d6950e9b'
+api_key = os.environ.get('PRIVATE_API_KEY')
+
 converter_url = 'https://pro-api.coinmarketcap.com/v1/tools/price-conversion'
+
 crypto_to_convert=str(input('Qual criptomoeda deseja converter: Bitcoin, Ethereum ou Litecoin? '))
 currency=str(input('Para qual moeda deseja converter?(Utilize o formato: USD) '))
 amount=input('Quanto deseja converter? ')
@@ -43,7 +46,7 @@ session.headers.update(headers)
 try:
   response = session.get(converter_url, params=parameters)
   results = json.loads(response.text)
-  # print(json.dumps(results, sort_keys=True, indent=4))
+  print(json.dumps(results, sort_keys=True, indent=4))
 except (ConnectionError, Timeout, TooManyRedirects) as e:
   print(e)
 

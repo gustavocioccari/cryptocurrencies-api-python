@@ -2,9 +2,12 @@ from requests import Request, Session
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import json
 from datetime import datetime
+import os
+
+api_key = os.environ.get('PRIVATE_API_KEY')
 
 global_url = 'https://pro-api.coinmarketcap.com/v1/global-metrics/quotes/latest'
-api_key = '007bfbc5-f2f2-4c56-8c0d-6fa1d6950e9b'
+
 parameters = {
   'convert':'USD'
 }
